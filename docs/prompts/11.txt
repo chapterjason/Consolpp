@@ -1,0 +1,15 @@
+Find code in this C++ codebase that duplicates existing functionality:
+- New utility functions that do what an existing in-repo util already does.
+- Hand-written versions of what the standard library (`<algorithm>`, `<string_view>`, `<filesystem>`, `<charconv>`, etc. for the project's C++ standard) or already-linked dependencies (Boost, Abseil, fmt, etc.) provide.
+- Custom smart pointers, string splitters, and containers.
+- Newly added dependencies in CMakeLists/conanfile/vcpkg.json that are replaceable by existing ones.
+
+Also find new code that ignores established local conventions: error-handling style (exceptions vs error codes vs expected), ownership style (unique_ptr vs raw), logging macros, naming, header/source layout, and include style.
+
+For duplicates, replace the new code with the existing one and update call sites. For conventions, align new code with the dominant existing pattern. Do not remove dependencies yourself; report them.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each replacement and each dependency flagged, plus the build and test result.

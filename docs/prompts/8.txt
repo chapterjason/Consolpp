@@ -1,0 +1,11 @@
+Find compatibility leftovers nobody asked for in this C++ codebase: functions/classes/files named with `_v2`, `_new`, `_old`, `Legacy`, `Deprecated`; `[[deprecated]]` symbols; `using OldName = NewName;` aliases; `#define` renames; overloads kept only for old signatures; forwarding/compat headers that just `#include` another header; old code paths kept beside new ones; internal shims and adapters bridging versions.
+
+For each, check all call sites in the repo. If only one version is used, delete the unused one and rename the survivor to the plain name, updating call sites and includes. If the symbol is part of a public/installed header or exported ABI, leave it and report it.
+
+Do not change anything else.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each removal and rename, plus the build and test result.

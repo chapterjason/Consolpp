@@ -1,0 +1,11 @@
+Find abstractions with only one use in this C++ codebase: helper functions called from a single place, abstract base classes or interfaces with one implementation, templates with one instantiation, factories that build one type, wrapper/Manager/Handler classes around a single call, pimpl where nothing needs hiding, CRTP/policy patterns with one user, and config structs passed to one consumer.
+
+For each, inline or de-virtualize it if that makes the code no harder to read. Keep abstractions that are part of a public/installed API, form an ABI boundary, serve as a test seam (mocked in tests), or clearly separate a distinct concern.
+
+Do not change behavior.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each abstraction removed and each kept with the reason, plus the build and test result.

@@ -1,0 +1,11 @@
+Find configuration with no current use in this C++ codebase: function parameters and default arguments always called with the same value, template parameters always instantiated with the same type/value, policy classes with only one policy, virtual functions never overridden, CMake `option()`s and cache variables never toggled, `#ifdef` feature macros never defined anywhere, env vars never set, and config struct fields nothing reads.
+
+For each, remove it and hardcode the single value actually used, updating call sites and build files. Keep anything set in CI, packaging, deployment, or presets files, part of a public/installed API, or documented as user-facing.
+
+Do not change behavior.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each option removed and the value it was fixed to, plus the build and test result.

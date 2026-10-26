@@ -1,0 +1,11 @@
+Find near-duplicate code in this C++ codebase: functions, classes, or blocks that are largely identical with small differences (different constant, type, extra step, renamed variable), including `foo`/`fooWithX`/`fooForY` patterns, per-type copies that differ only by type, and const/non-const member function pairs with duplicated bodies.
+
+For each group, merge them into one implementation that expresses the real difference directly (a parameter, a template, or a shared private helper), and update call sites. If the duplicates are diverging on purpose (different owners, performance-critical specializations, ABI constraints), leave them and report why.
+
+Do not change behavior.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each group merged and each left alone, plus the build and test result.

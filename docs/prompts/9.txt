@@ -1,0 +1,11 @@
+Find type-system and warning escapes in this C++ codebase: C-style casts, `reinterpret_cast`, `const_cast`, `void*` used to pass typed data, narrowing `static_cast`s that hide real mismatches, type punning through unions or `memcpy`, `std::any`/`void*` where a concrete type is known, `#pragma GCC/clang diagnostic ignored`, `#pragma warning(disable: ...)`, `// NOLINT`, and `-Wno-*` or warning-disabling flags added in build files.
+
+For each, remove the escape and fix the underlying type issue properly. If a correct fix isn't possible without a larger redesign (e.g. required by a C API, hardware/serialization layout), keep the escape, narrow it as much as possible, and add a one-line comment explaining why.
+
+Do not change runtime behavior.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, with warnings enabled, run clang-tidy, and run the full test suite. Fix any break or new warning your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each escape removed and each kept with the reason, plus the build and test result.

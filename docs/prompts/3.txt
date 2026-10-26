@@ -1,0 +1,11 @@
+Find redundant defensive checks in this C++ codebase: null checks on pointers that cannot be null (results of `new`, `make_unique`/`make_shared`, addresses of objects, `this`), `if (ptr) delete ptr;`, `if (!v.empty())` before a range-for, bounds checks on `std::array` with constant indices, re-validation of values already validated by the caller, and checks on values guaranteed by the type system.
+
+Trace each value to its source. Remove the check where the guarantee is clear. Where a pointer parameter can never be null, change it to a reference if that doesn't alter a public API. Keep checks at trust boundaries (user input, file/network data, C APIs, deserialization) and where the guarantee is uncertain.
+
+Do not change anything else.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each check removed and what guarantees it, plus the build and test result.

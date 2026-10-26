@@ -1,0 +1,11 @@
+Review the diff of [BRANCH/COMMIT RANGE] against [BASE] in this C++ codebase.
+
+Identify every change unrelated to the stated purpose: [PURPOSE]. This includes clang-format reformatting, include reordering, `auto` conversions, east/west const flips, `NULL`→`nullptr` or added `override`/`noexcept`/`const` in code the purpose doesn't touch, renames, drive-by refactors, whitespace changes, header reshuffles, and edits in files the purpose doesn't require.
+
+Revert those unrelated changes, leaving only what the purpose needs.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your reverts caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List what was reverted, plus the build and test result.

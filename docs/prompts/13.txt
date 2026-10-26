@@ -1,0 +1,11 @@
+Find Doxygen/doc comments in this C++ codebase that only restate the function name, signature, parameter names, or types (e.g. `/** @brief Gets the user. @param id The id. @return The user. */`), including doc comments duplicated in both header and source.
+
+Delete them where they add nothing. Where part of a doc comment carries real information (preconditions, ownership/lifetime, thread safety, units, complexity, exceptions thrown, side effects), keep only that part. For public/installed headers whose docs are generated, keep the comment but trim the redundant lines. Remove source-file duplicates of header docs.
+
+Do not change any code.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite to confirm nothing changed. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List the files touched and the count per file, plus the build and test result.

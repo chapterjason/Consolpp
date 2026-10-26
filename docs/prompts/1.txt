@@ -1,0 +1,11 @@
+Find every place in this C++ codebase that catches or receives an error and continues without handling it: `catch (...) {}`, empty catch blocks, `catch (const std::exception&)` that only logs, catches that return `{}`/`nullptr`/`false`/`-1`/empty `std::optional`, ignored return codes and `std::error_code`s, error returns discarded with `(void)`, and unchecked `errno`.
+
+For each one: if the caller can't meaningfully recover, remove the catch (or stop discarding the error) and let it propagate using the codebase's existing error mechanism (exceptions, error codes, `std::expected`, etc.). If recovery is genuinely intended, catch the narrowest specific type and handle it explicitly. Keep catches at real boundaries (main, thread entry points, request handlers, C-API boundaries, destructors) where errors are reported, not hidden.
+
+Do not change anything else.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each location changed and what you did, plus the build and test result.

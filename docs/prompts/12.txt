@@ -1,0 +1,13 @@
+Find leftovers in this C++ codebase: unused `#include`s, unused variables/parameters/functions (especially in anonymous namespaces or `static`), unused forward declarations, `[[maybe_unused]]` added to silence real dead code, unreachable code, `#if 0` blocks, commented-out code, debug `std::cout`/`std::cerr`/`printf`/`fprintf` statements, emoji in logs, and stray files (scratch `.cpp` files, `test_*.cpp` outside test dirs, `SUMMARY.md`, `NOTES.md`, `*.bak`, `*_old.*`, unused CMake targets).
+
+Use compiler warnings (`-Wunused`, `-Wall -Wextra`) and include-what-you-use or clang-tidy if available to help find these.
+
+Remove unused includes, debug prints, `#if 0` blocks, and commented-out code. For unused functions/variables, verify no external linkage use, macro use, or reflection/registration use, then remove. For stray files and unused CMake targets, list them but do not delete.
+
+Do not change anything else.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List what was removed, plus the build and test result.

@@ -1,0 +1,59 @@
+add_library(consolpp_console STATIC
+    Consolpp/BuiltIn/ManCommand.cpp
+    Consolpp/Completion/Complete.cpp
+    Consolpp/Environment/GetValue.cpp
+    Consolpp/Event/Loop.cpp
+    Consolpp/Event/Registration.cpp
+    Consolpp/Formatting/CollectListEntries.cpp
+    Consolpp/GetVersion.cpp
+    Consolpp/Layout/Canvas.cpp
+    Consolpp/Layout/Columns.cpp
+    Consolpp/Layout/Paragraph.cpp
+    Consolpp/Layout/Stack.cpp
+    Consolpp/Parsing/ExtractGlobalOptions.cpp
+    Consolpp/Parsing/HasValueInNextArgument.cpp
+    Consolpp/Parsing/RequestsHelp.cpp
+    Consolpp/Parsing/RequestsVersion.cpp
+    Consolpp/Parsing/TokenIterator.cpp
+    Consolpp/Prompt/Autocompletion.cpp
+    Consolpp/Prompt/ChoiceField.cpp
+    Consolpp/Prompt/ConfirmationField.cpp
+    Consolpp/Prompt/Console.cpp
+    Consolpp/Prompt/CreateInputLineText.cpp
+    Consolpp/Prompt/DrawConfirmationField.cpp
+    Consolpp/Prompt/DrawForm.cpp
+    Consolpp/Prompt/DrawLines.cpp
+    Consolpp/Prompt/DrawTextField.cpp
+    Consolpp/Prompt/EraseFieldLines.cpp
+    Consolpp/Prompt/FormatChoiceQuestion.cpp
+    Consolpp/Prompt/FormatConfirmationField.cpp
+    Consolpp/Prompt/FormatTextField.cpp
+    Consolpp/Prompt/TextField.cpp
+    Consolpp/Screen/Section.cpp
+    Consolpp/Screen/SectionStack.cpp
+    Consolpp/Stream/InputStream.cpp
+    Consolpp/Stream/LineIterator.cpp
+    Consolpp/Stream/OutputStream.cpp
+    Consolpp/Stream/OutputStreamBuffer.cpp
+    Consolpp/Stream/OutputStreamIterator.cpp
+    Consolpp/Stream/ReadDescriptor.cpp
+    Consolpp/Stream/SourceBuffer.cpp
+    Consolpp/Terminal/BracketedPaste.cpp
+    Consolpp/Terminal/DetectCapabilities.cpp
+    Consolpp/Terminal/DetectColorMode.cpp
+    Consolpp/Terminal/DetectDecoration.cpp
+    Consolpp/Terminal/DetectHyperlinks.cpp
+    Consolpp/Terminal/GetColumns.cpp
+    Consolpp/Terminal/GetEnvironmentSize.cpp
+    Consolpp/Terminal/GetRows.cpp
+    Consolpp/Terminal/HasColorSupport.cpp
+    Consolpp/Terminal/HiddenCursor.cpp
+    Consolpp/Terminal/RawMode.cpp
+    Consolpp/Terminal/SynchronizedUpdate.cpp
+)
+add_library(Consolpp::console ALIAS consolpp_console)
+target_include_directories(consolpp_console PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+target_link_libraries(consolpp_console
+    PUBLIC Consolpp::markup Consolpp::text Consolpp::version
+    PRIVATE Consolpp::options
+)

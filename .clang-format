@@ -1,0 +1,90 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: c++20
+LineEnding: LF
+ColumnLimit: 120
+IndentWidth: 4
+ContinuationIndentWidth: 4
+IndentAccessModifiers: true
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
+IndentExternBlock: Indent
+UseTab: Never
+
+PointerAlignment: Left
+ReferenceAlignment: Left
+QualifierAlignment: Left
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterCaseLabel: false
+    AfterClass: true
+    AfterControlStatement: Never
+    AfterEnum: true
+    AfterFunction: true
+    AfterNamespace: true
+    AfterStruct: true
+    AfterUnion: true
+    AfterExternBlock: false
+    BeforeCatch: false
+    BeforeElse: false
+    BeforeLambdaBody: false
+    BeforeWhile: false
+    SplitEmptyFunction: true
+    SplitEmptyRecord: true
+    SplitEmptyNamespace: false
+
+AlignAfterOpenBracket: Align
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: false
+BinPackParameters: OnePerLine
+BreakBeforeBinaryOperators: NonAssignment
+BreakBinaryOperations: RespectPrecedence
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeColon
+BreakInheritanceList: BeforeColon
+PackConstructorInitializers: Never
+BreakTemplateDeclarations: Yes
+BreakAfterAttributes: Always
+BreakAfterReturnType: Automatic
+PenaltyReturnTypeOnItsOwnLine: 1000000
+PenaltyBreakAssignment: 1000
+RequiresClausePosition: OwnLine
+IndentRequiresClause: true
+
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+
+InsertBraces: true
+InsertNewlineAtEOF: true
+RemoveSemicolon: true
+RemoveEmptyLinesInUnwrappedLines: true
+SeparateDefinitionBlocks: Always
+MaxEmptyLinesToKeep: 1
+KeepEmptyLines:
+    AtEndOfFile: false
+    AtStartOfBlock: false
+    AtStartOfFile: false
+
+FixNamespaceComments: true
+ShortNamespaceLines: 0
+NamespaceIndentation: All
+CompactNamespaces: false
+
+SortIncludes: CaseSensitive
+SortUsingDeclarations: LexicographicNumeric
+IncludeBlocks: Regroup
+IncludeCategories:
+    - Regex: '^"'
+      Priority: 1
+    - Regex: '^<[a-z_]+>$'
+      Priority: 2
+    - Regex: '^<'
+      Priority: 3

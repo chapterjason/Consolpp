@@ -1,0 +1,16 @@
+Find tests in this C++ codebase that have been weakened or gamed:
+- GoogleTest `DISABLED_` prefixes and `GTEST_SKIP()`; Catch2 hidden tags (`[.]`, `[!mayfail]`, `[!shouldfail]`); doctest `skip`.
+- Tests removed from or commented out of CMake `add_test`/test target lists.
+- Commented-out assertions.
+- Loosened assertions: `EXPECT_TRUE(x)` instead of `EXPECT_EQ`, `EXPECT_NEAR` with oversized tolerance, `EXPECT_NO_THROW` replacing a value check, `ASSERT_*` downgraded to `EXPECT_*` to keep going past failures.
+- try/catch around assertions.
+- Expected values copied from current output.
+- Production code that branches on test conditions (`#ifdef TESTING`, `#define private public`, test-only flags or globals).
+
+Do not fix anything.
+
+Check formatting with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite, including disabled tests if the framework allows it (e.g. `--gtest_also_run_disabled_tests`). Include the result.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+Report each item: file, line, what was weakened, and what the test should actually assert. Flag any production code that branches on test conditions.

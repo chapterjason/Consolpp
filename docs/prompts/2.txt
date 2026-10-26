@@ -1,0 +1,11 @@
+Find default/fallback values applied to data that should never be missing in this C++ codebase: `.value_or(...)`, `map[key]` used for lookup (silently inserting a default), `find(...) != end() ? ... : default`, `getenv` with a default, `stoi`/`stod` wrapped in try/catch returning a default, default arguments that mask missing required input, and ternaries substituting a default for a null pointer.
+
+For each one, determine from the code whether the value can legitimately be absent. If it can't, remove the fallback so missing data fails loudly (`.at()`, `.value()`, an assert, or an explicit error using the codebase's error mechanism). If it legitimately can, keep it.
+
+Do not change anything else.
+
+Then format the files you changed with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite. Fix any break your changes caused. If a failure also occurs without your changes, report it and leave it.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+List each fallback removed and each one kept with the reason, plus the build and test result.

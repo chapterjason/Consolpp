@@ -1,0 +1,12 @@
+# A macro, so the variables CPMAddPackage sets for the package reach the caller.
+macro(consolpp_add_package)
+    set(consolpp_cxx_flags "${CMAKE_CXX_FLAGS}")
+    set(consolpp_cxx_clang_tidy "${CMAKE_CXX_CLANG_TIDY}")
+    set(CMAKE_CXX_CLANG_TIDY "")
+    string(APPEND CMAKE_CXX_FLAGS " -w")
+    CPMAddPackage(${ARGV} SYSTEM YES)
+    set(CMAKE_CXX_FLAGS "${consolpp_cxx_flags}")
+    set(CMAKE_CXX_CLANG_TIDY "${consolpp_cxx_clang_tidy}")
+    unset(consolpp_cxx_flags)
+    unset(consolpp_cxx_clang_tidy)
+endmacro()

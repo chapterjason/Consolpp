@@ -1,0 +1,4 @@
+---
+# libc++ declares the replaceable operator new and delete with reserved parameter names no definition can match.
+InheritParentConfig: true
+Checks: -readability-inconsistent-declaration-parameter-name

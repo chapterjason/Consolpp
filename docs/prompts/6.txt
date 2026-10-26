@@ -1,0 +1,9 @@
+Find placeholder implementations in this C++ codebase: TODO/FIXME/XXX, "placeholder", "simplified", "for now", "mock", "dummy", "temporary", empty function bodies, bodies that only `return {};`/`return 0;`/`return true;`/`return nullptr;`, `throw std::runtime_error("not implemented")` or similar, `assert(false)`/`abort()` in reachable paths, `#if 0` blocks hiding the real implementation, and fake/sample data in non-test code.
+
+Do not implement or change anything.
+
+Check formatting with clang-format, build the project with its existing build setup, run clang-tidy, and run the full test suite, and include the result.
+
+If the build preset reports no work to do, there is no work to do: do not clean, rebuild, or otherwise force the build or clang-tidy to run again.
+
+Report each stub: file, line, what it pretends to do, and what is actually missing. Mark which ones are reachable in production paths.
